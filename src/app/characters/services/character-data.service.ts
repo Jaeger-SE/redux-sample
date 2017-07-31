@@ -27,7 +27,7 @@ export class CharacterDataService {
 
   getGroupedCharacters(): Promise<GroupedCharacters[]> {
     return this.getCharacters().then((characters: Character[]) => {
-      const a = _(characters).groupBy((c:Character) => c.race).map((characterList:Character[], key:string) => {
+      const a = _(characters).groupBy((c: Character) => c.race).map((characterList: Character[], key: string) => {
         return {
           groupName: key,
           groupColor: "#FFCC00",
@@ -36,5 +36,15 @@ export class CharacterDataService {
       }).value();
       return a;
     });
+  }
+
+  createCharacter(character: Character): Promise<void> {
+    return this.http.post(environment.apiUrl + "/character", character)
+      .toPromise()
+      .then<void>()
+      .catch(error => {
+        this.loggerService.debug(error);
+        return Promise.reject(error.message || error);
+      });
   }
 }

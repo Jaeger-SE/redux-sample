@@ -31,7 +31,7 @@ import { CharacterAddFormComponent } from './components/character-add-form/chara
     InMemoryWebApiModule.forRoot(InMemoryDataService, {
       host: 'localhost',
       apiBase: 'api',
-      delay: 500
+      delay: 3000
     }),
     NgbModule
   ],
