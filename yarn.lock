@@ -141,6 +141,10 @@
   dependencies:
     tsickle "^0.21.0"
 
+"@ng-bootstrap/ng-bootstrap@^1.0.0-alpha.29":
+  version "1.0.0-alpha.29"
+  resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-1.0.0-alpha.29.tgz#ca2fa1d2dd94e8f077921e59d78ac51075bcdcd6"
+
 "@ngtools/json-schema@1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@ngtools/json-schema/-/json-schema-1.1.0.tgz#c3a0c544d62392acc2813a42c8a0dc6f58f86922"
@@ -1759,6 +1763,10 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
+font-awesome@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/font-awesome/-/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
+
 for-in@^0.1.3:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-0.1.8.tgz#d8773908e31256109952b1fdb9b3fa867d2775e1"
@@ -2532,9 +2540,13 @@ istanbul-reports@^1.1.1:
   dependencies:
     handlebars "^4.0.3"
 
-jasmine-core@~2.6.0, jasmine-core@~2.6.2:
+jasmine-core@~2.6.2:
   version "2.6.4"
   resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-2.6.4.tgz#dec926cd0a9fa287fb6db5c755fa487e74cecac5"
+
+jasmine-core@~2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-2.7.0.tgz#50ff8c4f92d8ef5c0b2c1b846dd263ed85152091"
 
 jasmine-spec-reporter@~4.1.0:
   version "4.1.1"
@@ -2543,12 +2555,12 @@ jasmine-spec-reporter@~4.1.0:
     colors "1.1.2"
 
 jasmine@^2.5.3:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/jasmine/-/jasmine-2.6.0.tgz#6b22e70883e8e589d456346153b4d206ddbe217f"
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/jasmine/-/jasmine-2.7.0.tgz#5cf0bb4e594b4600bb4235560366212ac5aea1b2"
   dependencies:
     exit "^0.1.2"
     glob "^7.0.6"
-    jasmine-core "~2.6.0"
+    jasmine-core "~2.7.0"
 
 jasminewd2@^2.1.0:
   version "2.1.0"
@@ -2563,8 +2575,8 @@ js-tokens@^3.0.0:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
 
 js-yaml@^3.4.3, js-yaml@^3.7.0:
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.9.0.tgz#4ffbbf25c2ac963b8299dc74da7e3740de1c18ce"
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.9.1.tgz#08775cebdfdd359209f0d2acd383c8f86a6904a0"
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
@@ -2885,8 +2897,8 @@ macaddress@^0.2.8:
   resolved "https://registry.yarnpkg.com/macaddress/-/macaddress-0.2.8.tgz#5904dc537c39ec6dbefeae902327135fa8511f12"
 
 magic-string@^0.22.3:
-  version "0.22.3"
-  resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.22.3.tgz#047989d99bfc7cbdefba1604adc8912551cd7ef1"
+  version "0.22.4"
+  resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.22.4.tgz#31039b4e40366395618c1d6cf8193c53917475ff"
   dependencies:
     vlq "^0.2.1"
 
@@ -4830,13 +4842,17 @@ type-is@~1.6.15:
     media-typer "0.3.0"
     mime-types "~2.1.15"
 
-"typescript@>=2.0.0 <2.4.0", typescript@~2.3.3:
+"typescript@>=2.0.0 <2.4.0":
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.3.4.tgz#3d38321828231e434f287514959c37a82b629f42"
 
+typescript@~2.4.1:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.4.2.tgz#f8395f85d459276067c988aa41837a8f82870844"
+
 uglify-js@3.0.x:
-  version "3.0.26"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.0.26.tgz#ba279ca597b13fe6c62c2d87dd5188e57a7a3233"
+  version "3.0.27"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.0.27.tgz#a97db8c8ba6b9dba4e2f88d86aa9548fa6320034"
   dependencies:
     commander "~2.11.0"
     source-map "~0.5.1"

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Character } from '../../model';
+import { GroupedCharacters } from '../../model';
 
 @Component({
   selector: 'app-character-grid',
@@ -8,7 +8,7 @@ import { Character } from '../../model';
 })
 export class CharacterGridComponent implements OnInit {
   @Input()
-  characters: Character[];
+  characterGroups: GroupedCharacters[];
 
   constructor() { }
 

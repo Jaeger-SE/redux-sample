@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Character } from '../../model';
+import { Character, GroupedCharacters } from '../../model';
 import { CharacterDataService } from '../../services/character-data.service';
 
 @Component({

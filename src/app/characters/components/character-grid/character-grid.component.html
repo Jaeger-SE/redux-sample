@@ -1,13 +1,32 @@
-<div class="tile is-ancestor">
-  <app-character-card *ngFor="let character of characters" [character]="character" class=""></app-character-card>
-</div>
+<!-- <div class="tile is-ancestor">
+  <div class="tile" *ngFor="let group of characterGroups">
 
-
-<div class="tile is-ancestor">
-  <div class="tile is-vertical is-8">
-
+    <div class="tile is-parent is-vertical">
+      <app-character-card *ngFor="let character of group.characters" [character]="character" class="tile is-child box"></app-character-card>
+    </div>
   </div>
-  <div class="tile is-parent">
+</div> -->
 
+<!-- <div class="tile is-ancestor is-6">
+  <div class="tile is-vertical">
+    <div class="tile is-parent" *ngFor="let group of characterGroups">
+      <div class="tile is-2">
+        {{group.groupName}}
+      </div>
+      <div class="tile is-vertical is-10">
+        <app-character-card class="tile is-parent" *ngFor="let character of group.characters" [character]="character"></app-character-card>
+      </div>
+    </div>
   </div>
-</div>
+</div> -->
+
+<ul>
+  <li *ngFor="let group of characterGroups">
+    {{group.groupName}}
+    <ul class="is-6">
+      <li *ngFor="let character of group.characters">
+        <app-character-card [character]="character"></app-character-card>
+      </li>
+    </ul>
+  </li>
+</ul>

@@ -27,10 +27,14 @@ export class CharacterDataService {
 
   getGroupedCharacters(): Promise<GroupedCharacters[]> {
     return this.getCharacters().then((characters: Character[]) => {
-      const a = _(characters).groupBy('race').map((x: _.Dictionary<Character[]>) => {
-        console.log(x);
-      });
-      return undefined;
+      const a = _(characters).groupBy((c:Character) => c.race).map((characterList:Character[], key:string) => {
+        return {
+          groupName: key,
+          groupColor: "#FFCC00",
+          characters: characterList
+        }
+      }).value();
+      return a;
     });
   }
 }

@@ -4,6 +4,9 @@
         <h2 class="subtitle">
             All the character in the application
         </h2>
-        <app-character-grid [characters]="characters"></app-character-grid>
+        <div class="add-character">
+            <app-character-add></app-character-add>
+        </div>
+        <app-character-list [characters]="characters"></app-character-list>
     </div>
 </section>

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { CharactersModule } from './characters/characters.module';
@@ -10,7 +11,8 @@ import { CharactersModule } from './characters/characters.module';
   ],
   imports: [
     BrowserModule,
-    CharactersModule
+    CharactersModule,
+    NgbModule.forRoot()
   ],
   bootstrap: [AppComponent]
 })
