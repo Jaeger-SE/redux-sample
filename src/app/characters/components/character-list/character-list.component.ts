@@ -1,5 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Character } from '../../model';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Store } from 'redux';
+
+import { AppStore } from '../../../store/app.store';
+import { AppState, getCharacterList } from '../../../store/app.reducer';
+import * as CharacterActions from '../../store/character.actions';
+
+import { Character } from '../../character.model';
 
 @Component({
   selector: 'app-character-list',
@@ -7,14 +13,15 @@ import { Character } from '../../model';
   styleUrls: ['./character-list.component.scss']
 })
 export class CharacterListComponent implements OnInit {
-  @Input()
   characters: Character[];
 
-  constructor() {
+  constructor(@Inject(AppStore) private store: Store<AppState>) {
   }
 
   ngOnInit() {
-
+    this.store.subscribe(() => {
+      this.characters = getCharacterList(this.store.getState());
+    });
   }
 
 }

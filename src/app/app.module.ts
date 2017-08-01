@@ -2,6 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import {
+  AppState,
+  default as reducer
+} from './store/app.reducer';
+import {
+  AppStore,
+  appStoreProviders
+} from './store/app.store';
+
 import { AppComponent } from './app.component';
 import { CharactersModule } from './characters/characters.module';
 
@@ -14,6 +23,7 @@ import { CharactersModule } from './characters/characters.module';
     CharactersModule,
     NgbModule.forRoot()
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [appStoreProviders]
 })
 export class AppModule { }

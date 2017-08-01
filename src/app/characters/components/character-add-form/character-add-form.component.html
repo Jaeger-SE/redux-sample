@@ -14,7 +14,7 @@
                     </div>
                     <div class="field">
                         <p class="control is-expanded has-icons-left">
-                            <input class="input" placeholder="@tag">
+                            <input class="input" placeholder="@tag" formControlName="tag">
                             <span class="icon is-small is-left"><i class="fa fa-twitter"></i></span>
                         </p>
                     </div>
@@ -44,7 +44,7 @@
                 <div class="field-body">
                     <div class="field">
                         <div class="control">
-                            <button class="button is-primary" [disabled]="!form.valid" (click)="create()">
+                            <button class="button is-primary" [disabled]="!form.valid || isPosting" (click)="create()" [class.is-loading]="isPosting">
                                 Create
                             </button>
                             <button class="button">
@@ -55,8 +55,6 @@
                 </div>
             </div>
         </form>
-
-        {{ form.value | json }}
     </div>
 </div>
 

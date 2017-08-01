@@ -16,7 +16,6 @@ import { CharacterDataService } from './services/character-data.service';
 import { CharacterViewComponent } from './components/character-view/character-view.component';
 import { CharacterListComponent } from './components/character-list/character-list.component';
 import { CharacterCardComponent } from './components/character-card/character-card.component';
-import { CharacterGridComponent } from './components/character-grid/character-grid.component';
 import { CharacterAddComponent } from './components/character-add/character-add.component';
 import { CharacterAddFormComponent } from './components/character-add-form/character-add-form.component';
 
@@ -31,11 +30,11 @@ import { CharacterAddFormComponent } from './components/character-add-form/chara
     InMemoryWebApiModule.forRoot(InMemoryDataService, {
       host: 'localhost',
       apiBase: 'api',
-      delay: 3000
+      delay: 500
     }),
     NgbModule
   ],
-  declarations: [CharacterListComponent, CharacterViewComponent, CharacterCardComponent, CharacterGridComponent, CharacterAddComponent, CharacterAddFormComponent],
+  declarations: [CharacterListComponent, CharacterViewComponent, CharacterCardComponent, CharacterAddComponent, CharacterAddFormComponent],
   exports: [CharacterViewComponent],
   providers: [CharacterDataService],
   entryComponents: [CharacterAddFormComponent]

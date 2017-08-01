@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormGroupDirective, NgControl } from '@angular/forms';
+import { Store } from 'redux';
 
-import { Character } from '../../model';
+import { Character } from '../../character.model';
 
 import { DialogService } from '../../../core/modal/dialog.service';
 import { DialogComponent } from '../../../core/modal/dialog.component';
+
+import { AppStore } from '../../../store/app.store';
+import { AppState, getCharacterList } from '../../../store/app.reducer';
+import * as CharacterActions from '../../store/character.actions';
 
 import { CharacterDataService } from '../../services/character-data.service';
 
@@ -16,9 +21,11 @@ import { CharacterDataService } from '../../services/character-data.service';
 export class CharacterAddFormComponent extends DialogComponent<null, Character> implements OnInit {
   form: FormGroup;
   races: string[];
+  isPosting: boolean;
 
-  constructor(private modalService: DialogService, fb: FormBuilder, private characterDataService: CharacterDataService) {
+  constructor( @Inject(AppStore) private store: Store<AppState>, private modalService: DialogService, fb: FormBuilder, private characterDataService: CharacterDataService) {
     super(modalService);
+    this.isPosting = false;
     this.races = [
       "saiyan",
       "human",
@@ -27,7 +34,8 @@ export class CharacterAddFormComponent extends DialogComponent<null, Character> 
     ]
     this.form = fb.group({
       name: ["", Validators.required],
-      race: [undefined, Validators.required]
+      race: [undefined, Validators.required],
+      tag: [undefined, Validators.maxLength(10)]
     });
   }
 
@@ -39,9 +47,16 @@ export class CharacterAddFormComponent extends DialogComponent<null, Character> 
   }
 
   create(): void {
+    this.isPosting = true;
     var character = this.form.value as Character;
-    this.characterDataService.createCharacter(character).then(() => {
-      super.close();
-    })
+    this.characterDataService.createCharacter(character)
+      .then(() => {
+        this.store.dispatch(CharacterActions.addCharacter(character));
+        this.close();
+      })
+      .catch((error: any) => {
+        console.log(error);
+        this.isPosting = false;
+      });
   }
 }

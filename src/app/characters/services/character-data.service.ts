@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
 import * as _ from "lodash";
 
 import { environment } from '../../../environments/environment'
-import { Character, GroupedCharacters } from '../model';
+import { Character, GroupedCharacters } from '../character.model';
 import { LoggerService } from '../../core/services/logger.service';
 
 @Injectable()
