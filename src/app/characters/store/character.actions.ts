@@ -1,11 +1,5 @@
-import {
-    Action,
-    ActionCreator
-} from 'redux';
-import {
-    Character
-} from '../character.model';
-
+import { Action, ActionCreator } from 'redux';
+import { Character } from '../../api/models/character';
 export const ADD_CHARACTER = '[Character] Add character';
 export interface AddCharacterAction extends Action {
     character: Character;
@@ -15,7 +9,6 @@ export const addCharacter: ActionCreator<AddCharacterAction> =
         type: ADD_CHARACTER,
         character: character
     });
-
 
 export const LOAD_CHARACTER = '[Character] Load character';
 export interface LoadCharacterAction extends Action {

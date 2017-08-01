@@ -1,3 +1,3 @@
 <div class="columns is-multiline">
-  <app-character-card *ngFor="let character of characters" [character]="character" class="column is-3"></app-character-card>
+  <app-character-card *ngFor="let character of characters | async" [character]="character" class="column is-3"></app-character-card>
 </div>

@@ -1,11 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Store } from 'redux';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
-import { AppStore } from '../../../store/app.store';
-import { AppState, getCharacterList } from '../../../store/app.reducer';
-import * as CharacterActions from '../../store/character.actions';
-
-import { Character } from '../../character.model';
+import { Character } from '../../../api/models/character';
+import { CharacterService } from '../../services/character.service';
 
 @Component({
   selector: 'app-character-list',
@@ -13,15 +10,14 @@ import { Character } from '../../character.model';
   styleUrls: ['./character-list.component.scss']
 })
 export class CharacterListComponent implements OnInit {
-  characters: Character[];
+  characters: Observable<Character[]>;
 
-  constructor(@Inject(AppStore) private store: Store<AppState>) {
+  constructor(private characterService: CharacterService) {
+    this.characters = this.characterService.characterList;
   }
 
   ngOnInit() {
-    this.store.subscribe(() => {
-      this.characters = getCharacterList(this.store.getState());
-    });
+    
   }
 
 }

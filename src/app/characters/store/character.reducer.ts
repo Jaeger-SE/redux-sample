@@ -1,5 +1,6 @@
 import { Action } from 'redux';
-import { Character } from '../character.model';
+import { AppState } from '../../store/app.reducer';
+import { Character } from '../../api/models/character';
 import * as CharacterActions from './character.actions';
 import { createSelector } from 'reselect';
 
@@ -22,17 +23,12 @@ export const CharacterReducer = function (state: CharacterState = initialState, 
       return {
         characterList: state.characterList.concat(character)
       };
-    case CharacterActions.LOAD_CHARACTER:
-      const characterList: Character[] = (<CharacterActions.LoadCharacterAction>action).characterList;
-      return {
-        characterList: characterList
-      }
     default:
       return state;
   }
 };
 
-export const getCharacterState = (state): CharacterState => state.characters;
+export const getCharacterState = (state: AppState): CharacterState => state.characters;
 
 export const getCharacterList = createSelector(
   getCharacterState,

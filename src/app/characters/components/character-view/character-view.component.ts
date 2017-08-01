@@ -1,12 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Store } from 'redux';
+import * as Redux from 'redux';
 
 import { AppStore } from '../../../store/app.store';
 import { AppState, getCharacterList } from '../../../store/app.reducer';
 import * as CharacterActions from '../../store/character.actions';
 
-import { Character, GroupedCharacters } from '../../character.model';
-import { CharacterDataService } from '../../services/character-data.service';
+import { Character } from '../../../api/models/character';
+import { CharacterDataService } from '../../../api/services/character-data.service';
 
 @Component({
   selector: 'app-character-view',
@@ -14,12 +14,9 @@ import { CharacterDataService } from '../../services/character-data.service';
   styleUrls: ['./character-view.component.scss']
 })
 export class CharacterViewComponent implements OnInit {
-  constructor( @Inject(AppStore) private store: Store<AppState>, private characterDataService: CharacterDataService) { }
+  constructor( @Inject(AppStore) private store: Redux.Store<AppState>) { }
 
   ngOnInit() {
-    this.characterDataService.getCharacters().then(characters => {
-      this.store.dispatch(CharacterActions.loadCharacter(characters));
-    })
   }
 
 }

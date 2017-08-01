@@ -1,17 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormGroupDirective, NgControl } from '@angular/forms';
-import { Store } from 'redux';
 
-import { Character } from '../../character.model';
+import { Character, CharacterService } from '../../services/character.service';
 
 import { DialogService } from '../../../core/modal/dialog.service';
 import { DialogComponent } from '../../../core/modal/dialog.component';
-
-import { AppStore } from '../../../store/app.store';
-import { AppState, getCharacterList } from '../../../store/app.reducer';
-import * as CharacterActions from '../../store/character.actions';
-
-import { CharacterDataService } from '../../services/character-data.service';
 
 @Component({
   selector: 'app-character-add-form',
@@ -23,7 +16,7 @@ export class CharacterAddFormComponent extends DialogComponent<null, Character> 
   races: string[];
   isPosting: boolean;
 
-  constructor( @Inject(AppStore) private store: Store<AppState>, private modalService: DialogService, fb: FormBuilder, private characterDataService: CharacterDataService) {
+  constructor(private modalService: DialogService, private characterService: CharacterService, fb: FormBuilder) {
     super(modalService);
     this.isPosting = false;
     this.races = [
@@ -49,14 +42,8 @@ export class CharacterAddFormComponent extends DialogComponent<null, Character> 
   create(): void {
     this.isPosting = true;
     var character = this.form.value as Character;
-    this.characterDataService.createCharacter(character)
-      .then(() => {
-        this.store.dispatch(CharacterActions.addCharacter(character));
-        this.close();
-      })
-      .catch((error: any) => {
-        console.log(error);
-        this.isPosting = false;
-      });
+    this.characterService.createUser(character).then(() => {
+      this.close();
+    });
   }
 }
