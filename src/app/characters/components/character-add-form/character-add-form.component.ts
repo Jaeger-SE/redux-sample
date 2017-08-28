@@ -1,17 +1,24 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormGroupDirective, NgControl } from '@angular/forms';
-import * as redux from 'redux';
-
-import { Character } from '../../character.model';
+import {
+  Component,
+  OnInit,
+  Inject
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormGroupDirective,
+  NgControl
+} from '@angular/forms';
+import { Observable } from "rxjs";
 
 import { DialogService } from '../../../core/modal/dialog.service';
 import { DialogComponent } from '../../../core/modal/dialog.component';
 
-import { AppStore } from '../../../store/app.store';
-import { AppState } from '../../../store/app.reducer';
-import * as CharacterActions from '../../store/character.actions';
-
-import { CharacterDataService } from '../../services/character-data.service';
+import {
+  CharactersSandboxService,
+  Character
+} from '../../../facade/sandbox/characters-sandbox.service';
 
 @Component({
   selector: 'app-character-add-form',
@@ -22,8 +29,9 @@ export class CharacterAddFormComponent extends DialogComponent<null, Character> 
   form: FormGroup;
   races: string[];
   isPosting: boolean;
+  characters$: Observable<Character[]>;
 
-  constructor( @Inject(AppStore) private store: redux.Store<AppState>, private modalService: DialogService, fb: FormBuilder, private characterDataService: CharacterDataService) {
+  constructor(private modalService: DialogService, fb: FormBuilder, private charactersSandboxService: CharactersSandboxService) {
     super(modalService);
     this.isPosting = false;
     this.races = [
@@ -40,6 +48,7 @@ export class CharacterAddFormComponent extends DialogComponent<null, Character> 
   }
 
   ngOnInit() {
+    this.characters$ = this.charactersSandboxService.characters$;
   }
 
   cancel(): void {
@@ -49,14 +58,13 @@ export class CharacterAddFormComponent extends DialogComponent<null, Character> 
   create(): void {
     this.isPosting = true;
     var character = this.form.value as Character;
-    this.characterDataService.createCharacter(character)
-      .then(() => {
-        this.store.dispatch(CharacterActions.addCharacter(character));
+    this.charactersSandboxService.addCharacter(character).subscribe(
+      () => {
         this.close();
-      })
-      .catch((error: any) => {
+      },
+      (error: any) => {
         console.log(error);
         this.isPosting = false;
-      });
+      })
   }
 }

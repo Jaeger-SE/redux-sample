@@ -1,13 +1,42 @@
-import {
-    Component, ViewChild, ViewContainerRef, ComponentFactoryResolver,
-    Type
-} from "@angular/core";
+import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, Type } from "@angular/core";
+import { trigger, animate, transition, style, query } from '@angular/animations';
+import { Observable } from "rxjs";
+
 import { DialogComponent } from "./dialog.component";
 import { DialogWrapperComponent } from "./dialog-wrapper.component";
-import { Observable } from "rxjs";
 import { DialogOptions } from "./dialog.service";
 
+export const fadeAnimation =
+
+    trigger('fadeAnimation', [
+        transition('* => *', [
+            query(':enter',
+                [
+                    style({ opacity: 0 })
+                ],
+                { optional: true }
+            ),
+            query(':leave',
+                [
+                    style({ opacity: 1 }),
+                    animate('0.2s', style({ opacity: 0 }))
+                ],
+                { optional: true }
+            ),
+            query(':enter',
+                [
+                    style({ opacity: 0 }),
+                    animate('0.2s', style({ opacity: 1 }))
+                ],
+                { optional: true }
+            )
+        ])
+    ]);
+
 @Component({
+    animations: [
+        fadeAnimation
+    ],
     selector: 'dialog-holder',
     template: '<ng-template #element></ng-template>',
 })
@@ -61,7 +90,7 @@ export class DialogHolderComponent {
         if (options.closeByClickingOutside) {
             dialogWrapper.closeByClickOutside();
         }
-        if(options.closeByEscapeKeyPressed) {
+        if (options.closeByEscapeKeyPressed) {
             dialogWrapper.closeByEscapeKeyPressed();
         }
         if (options.backdropColor) {

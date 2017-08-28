@@ -1,12 +1,4 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import * as redux from 'redux';
-
-import { AppStore } from '../../../store/app.store';
-import { AppState } from '../../../store/app.reducer';
-import * as CharacterActions from '../../store/character.actions';
-
-import { Character, GroupedCharacters } from '../../character.model';
-import { CharacterDataService } from '../../services/character-data.service';
 
 @Component({
   selector: 'app-character-view',
@@ -14,12 +6,9 @@ import { CharacterDataService } from '../../services/character-data.service';
   styleUrls: ['./character-view.component.scss']
 })
 export class CharacterViewComponent implements OnInit {
-  constructor( @Inject(AppStore) private store: redux.Store<AppState>, private characterDataService: CharacterDataService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.characterDataService.getCharacters().then(characters => {
-      this.store.dispatch(CharacterActions.loadCharacter(characters));
-    })
   }
 
 }

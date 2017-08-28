@@ -1,8 +1,7 @@
-import { OnDestroy
-} from '@angular/core';
-import {Observable, Observer} from 'rxjs';
-import {DialogWrapperComponent} from "./dialog-wrapper.component";
-import {DialogService} from "./dialog.service";
+import { OnDestroy } from '@angular/core';
+import { Observable, Observer } from 'rxjs';
+import { DialogWrapperComponent } from "./dialog-wrapper.component";
+import { DialogService } from "./dialog.service";
 
 /**
  * Abstract dialog
@@ -31,23 +30,23 @@ export class DialogComponent<T, T1> implements OnDestroy {
    * Constructor
    * @param {DialogService} dialogService - instance of DialogService
    */
-  constructor(protected dialogService: DialogService) {}
+  constructor(protected dialogService: DialogService) { }
 
   /**
    *
    * @param {T} data
    * @return {Observable<T1>}
    */
-  fillData(data:T): Observable<T1> {
+  fillData(data: T): Observable<T1> {
     data = data || <T>{};
     let keys = Object.keys(data);
-    for(let i=0, length=keys.length; i<length; i++) {
+    for (let i = 0, length = keys.length; i < length; i++) {
       let key = keys[i];
       this[key] = data[key];
     }
-    return Observable.create((observer)=>{
+    return Observable.create((observer) => {
       this.observer = observer;
-      return ()=>{
+      return () => {
         this.close();
       }
     });
@@ -56,7 +55,7 @@ export class DialogComponent<T, T1> implements OnDestroy {
   /**
    * Closes dialog
    */
-  close():void {
+  close(): void {
     this.dialogService.removeDialog(this);
   }
 
@@ -65,7 +64,7 @@ export class DialogComponent<T, T1> implements OnDestroy {
    * Sends dialog result to observer
    */
   ngOnDestroy(): void {
-    if(this.observer) {
+    if (this.observer) {
       this.observer.next(this.result);
     }
   }

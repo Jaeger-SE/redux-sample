@@ -1,5 +1,11 @@
 import {
-  Injectable, ComponentFactoryResolver, ApplicationRef, Injector, EmbeddedViewRef, Type, Optional
+  Injectable,
+  ComponentFactoryResolver,
+  ApplicationRef,
+  Injector,
+  EmbeddedViewRef,
+  Type,
+  Optional
 } from "@angular/core";
 import { Observable } from "rxjs";
 
@@ -15,7 +21,7 @@ export interface DialogOptions {
 }
 
 export class DialogServiceConfig {
-  container: HTMLElement=null;
+  container: HTMLElement = null;
 }
 
 @Injectable()
@@ -50,8 +56,8 @@ export class DialogService {
    * @param {DialogOptions?} options
    * @return {Observable<T1>}
    */
-  addDialog<T, T1>(component:Type<DialogComponent<T, T1>>, data?:T, options?:DialogOptions): Observable<T1> {
-    if(!this.dialogHolderComponent) {
+  addDialog<T, T1>(component: Type<DialogComponent<T, T1>>, data?: T, options?: DialogOptions): Observable<T1> {
+    if (!this.dialogHolderComponent) {
       this.dialogHolderComponent = this.createDialogHolder();
     }
     return this.dialogHolderComponent.addDialog<T, T1>(component, data, options);
@@ -61,8 +67,8 @@ export class DialogService {
    * Hides and removes dialog from DOM
    * @param {DialogComponent} component
    */
-  removeDialog(component:DialogComponent<any, any>): void {
-    if(!this.dialogHolderComponent) {
+  removeDialog(component: DialogComponent<any, any>): void {
+    if (!this.dialogHolderComponent) {
       return;
     }
     this.dialogHolderComponent.removeDialog(component);
@@ -85,7 +91,7 @@ export class DialogService {
 
     let componentRef = componentFactory.create(this.injector);
     let componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-    if(!this.container) {
+    if (!this.container) {
       let componentRootViewContainer = this.applicationRef['_rootComponents'][0];
       this.container = (componentRootViewContainer.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
     }

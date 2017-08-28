@@ -1,6 +1,6 @@
 import { Action } from 'redux';
-import { Character } from '../character.model';
-import * as CharacterActions from './character.actions';
+import { Character } from '../../models/character.model';
+import * as CharacterActions from '../actions/character.actions';
 
 export { Character };
 

@@ -9,13 +9,13 @@ import {
 import {
   AppState,
   default as reducer
-} from './app.reducer';
+} from './reducers/app.reducer';
 
 export const AppStore = new InjectionToken('App.store');
 
 const devtools: StoreEnhancer<AppState> =
   window['devToolsExtension'] ?
-  window['devToolsExtension']() : f => f;
+    window['devToolsExtension']() : f => f;
 
 export function createAppStore(): Store<AppState> {
   return createStore<AppState>(
@@ -25,5 +25,5 @@ export function createAppStore(): Store<AppState> {
 }
 
 export const appStoreProviders = [
-   { provide: AppStore, useFactory: createAppStore }
+  { provide: AppStore, useFactory: createAppStore }
 ];

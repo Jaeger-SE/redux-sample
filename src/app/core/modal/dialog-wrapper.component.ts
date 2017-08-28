@@ -1,46 +1,12 @@
-import {
-    Component, HostListener, ViewContainerRef, ViewChild, ComponentFactoryResolver, ReflectiveInjector, Type
-} from '@angular/core';
+import { Component, HostListener, ViewContainerRef, ViewChild, ComponentFactoryResolver, ReflectiveInjector, Type } from '@angular/core';
 
 import { DialogComponent } from "./dialog.component";
 import { DialogService } from "./dialog.service";
 
-import { trigger, animate, transition, style, query } from '@angular/animations';
-
-export const fadeAnimation =
-
-    trigger('fadeAnimation', [
-        transition('* => *', [
-            query(':enter',
-                [
-                    style({ opacity: 0 })
-                ],
-                { optional: true }
-            ),
-            query(':leave',
-                [
-                    style({ opacity: 1 }),
-                    animate('0.2s', style({ opacity: 0 }))
-                ],
-                { optional: true }
-            ),
-            query(':enter',
-                [
-                    style({ opacity: 0 }),
-                    animate('0.2s', style({ opacity: 1 }))
-                ],
-                { optional: true }
-            )
-        ])
-    ]);
-
 @Component({
     selector: 'dialog-wrapper',
-    animations: [
-        fadeAnimation
-    ],
     template: `
-    <div #container [@fadeAnimation]="true" class="modal" role="dialog">
+    <div #container class="modal" role="dialog">
         <div class="modal-background"></div>
         <div class="modal-content">
             <ng-template #element></ng-template>
@@ -112,7 +78,7 @@ export class DialogWrapperComponent {
 
     @HostListener('window:keyup', ['$event'])
     onKeyPress(e: KeyboardEvent) {
-        if(!this.handleEscapePressed)
+        if (!this.handleEscapePressed)
             return;
         if (e.keyCode == 27)
             this.dialogService.removeDialog(this.content);

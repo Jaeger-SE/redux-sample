@@ -1,6 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+
+// Import modal dependencies
 import { DialogService } from '../../../core/modal/dialog.service';
 
+// Import component used as content in the modal
 import { CharacterAddFormComponent } from '../character-add-form/character-add-form.component';
 
 @Component({

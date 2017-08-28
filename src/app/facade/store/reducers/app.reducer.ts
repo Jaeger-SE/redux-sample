@@ -1,6 +1,14 @@
-import { Reducer, combineReducers } from 'redux';
-import { CharactersState, CharacterReducer } from '../characters/store/character.reducer';
-export * from '../characters/store/character.reducer';
+import {
+    Reducer,
+    combineReducers
+} from 'redux';
+
+import {
+    CharactersState,
+    CharacterReducer
+} from './character.reducer';
+
+export * from './character.reducer';
 
 export interface AppState {
     characters: CharactersState;
