@@ -16,6 +16,9 @@ export class CharacterAddComponent implements OnInit {
   }
 
   create(): void {
-    this.modalService.addDialog(CharacterAddFormComponent, undefined);
+    this.modalService.addDialog(CharacterAddFormComponent, undefined, {
+      closeByEscapeKeyPressed: true,
+      closeByClickingOutside: true
+    });
   }
 }

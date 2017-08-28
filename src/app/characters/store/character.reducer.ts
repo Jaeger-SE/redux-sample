@@ -1,21 +1,18 @@
 import { Action } from 'redux';
 import { Character } from '../character.model';
 import * as CharacterActions from './character.actions';
-import { createSelector } from 'reselect';
 
-/**
- * This file describes the state concerning Character, how to modify it through
- * the reducer, and the selectors.
- */
-export interface CharacterState {
+export { Character };
+
+export interface CharactersState {
   characterList: Character[];
 };
 
-const initialState: CharacterState = {
+const initialState: CharactersState = {
   characterList: []
 };
 
-export const CharacterReducer = function (state: CharacterState = initialState, action: Action): CharacterState {
+export const CharacterReducer = function (state: CharactersState = initialState, action: Action): CharactersState {
   switch (action.type) {
     case CharacterActions.ADD_CHARACTER:
       const character: Character = (<CharacterActions.AddCharacterAction>action).character;
@@ -31,9 +28,3 @@ export const CharacterReducer = function (state: CharacterState = initialState, 
       return state;
   }
 };
-
-export const getCharacterState = (state): CharacterState => state.characters;
-
-export const getCharacterList = createSelector(
-  getCharacterState,
-  (state: CharacterState) => state.characterList);

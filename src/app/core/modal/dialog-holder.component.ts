@@ -61,6 +61,9 @@ export class DialogHolderComponent {
         if (options.closeByClickingOutside) {
             dialogWrapper.closeByClickOutside();
         }
+        if(options.closeByEscapeKeyPressed) {
+            dialogWrapper.closeByEscapeKeyPressed();
+        }
         if (options.backdropColor) {
             dialogWrapper.container.nativeElement.style.backgroundColor = options.backdropColor;
         }

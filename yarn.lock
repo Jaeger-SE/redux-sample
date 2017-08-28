@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@angular/animations@^4.0.0":
-  version "4.3.2"
-  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-4.3.2.tgz#b4db17d743c8cd6952a657e76511da08432fb23f"
+"@angular/animations@^4.3.6":
+  version "4.3.6"
+  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-4.3.6.tgz#bf9283ec7c8c98b32f569d84dcda10890fdc0262"
   dependencies:
     tslib "^1.7.1"
 
@@ -3074,6 +3074,10 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
+ngx-pipes@^1.6.3:
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/ngx-pipes/-/ngx-pipes-1.6.3.tgz#3efb83714e1138de4074159d950c78d3fd705b2e"
+
 no-case@^2.2.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/no-case/-/no-case-2.3.1.tgz#7aeba1c73a52184265554b7dc03baf720df80081"
@@ -4115,10 +4119,6 @@ require-main-filename@^1.0.1:
 requires-port@1.0.x, requires-port@1.x.x:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
-
-reselect@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/reselect/-/reselect-3.0.1.tgz#efdaa98ea7451324d092b2b2163a6a1d7a9a2147"
 
 resolve@^1.1.6, resolve@^1.1.7, resolve@^1.3.2:
   version "1.4.0"

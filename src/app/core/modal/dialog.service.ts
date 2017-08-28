@@ -1,14 +1,16 @@
 import {
   Injectable, ComponentFactoryResolver, ApplicationRef, Injector, EmbeddedViewRef, Type, Optional
 } from "@angular/core";
+import { Observable } from "rxjs";
+
 import { DialogHolderComponent } from "./dialog-holder.component";
 import { DialogComponent } from "./dialog.component";
-import { Observable } from "rxjs";
 
 export interface DialogOptions {
   index?: number;
   autoCloseTimeout?: number;
   closeByClickingOutside?: boolean;
+  closeByEscapeKeyPressed?: boolean;
   backdropColor?: string;
 }
 
