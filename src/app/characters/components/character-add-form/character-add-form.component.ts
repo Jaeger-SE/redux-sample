@@ -8,7 +8,7 @@ import { DialogService } from '../../../core/modal/dialog.service';
 import { DialogComponent } from '../../../core/modal/dialog.component';
 
 import { AppStore } from '../../../store/app.store';
-import { AppState, getCharacterList } from '../../../store/app.reducer';
+import { AppState } from '../../../store/app.reducer';
 import * as CharacterActions from '../../store/character.actions';
 
 import { CharacterDataService } from '../../services/character-data.service';

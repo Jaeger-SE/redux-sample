@@ -1,5 +1,7 @@
 import { NgModule, ModuleWithProviders, ComponentFactoryResolver, ApplicationRef, Injector } from '@angular/core';
 import { CommonModule } from "@angular/common";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
 import { DialogHolderComponent } from "./dialog-holder.component";
 import { DialogWrapperComponent } from "./dialog-wrapper.component";
 import { DialogService, DialogServiceConfig } from "./dialog.service";
@@ -25,7 +27,8 @@ export function dialogServiceFactory(resolver: ComponentFactoryResolver, applica
     DialogService
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    BrowserAnimationsModule
   ],
   entryComponents: [
     DialogHolderComponent,

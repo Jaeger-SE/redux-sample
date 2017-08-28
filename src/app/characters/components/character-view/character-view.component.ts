@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import * as redux from 'redux';
 
 import { AppStore } from '../../../store/app.store';
-import { AppState, getCharacterList } from '../../../store/app.reducer';
+import { AppState } from '../../../store/app.reducer';
 import * as CharacterActions from '../../store/character.actions';
 
 import { Character, GroupedCharacters } from '../../character.model';

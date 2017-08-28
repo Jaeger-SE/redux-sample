@@ -1,4 +1,3 @@
-
 // Libraries
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -6,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { NgPipesModule } from 'ngx-pipes';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 // Mocks
 import { InMemoryDataService } from './mocks/in-memory-data-service';
@@ -33,13 +34,15 @@ import { CharacterAddFormComponent } from './components/character-add-form/chara
     CoreModule,
     ModalModule,
     FormsModule,
+    NgPipesModule,
     ReactiveFormsModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService, {
       host: 'localhost',
       apiBase: 'api',
       delay: 500
     }),
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule
   ],
   declarations: [CharacterListComponent, CharacterViewComponent, CharacterCardComponent, CharacterAddComponent, CharacterAddFormComponent],
   exports: [CharacterViewComponent],
