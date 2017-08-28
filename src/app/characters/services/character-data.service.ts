@@ -2,49 +2,47 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
 
-import * as _ from "lodash";
+import { chain } from "lodash";
 
 import { environment } from '../../../environments/environment'
 import { Character, GroupedCharacters } from '../character.model';
 import { LoggerService } from '../../core/services/logger.service';
+
+export { Character, GroupedCharacters };
 
 @Injectable()
 export class CharacterDataService {
 
   constructor(private http: Http, private loggerService: LoggerService) { }
 
-  getCharacters(): Promise<Character[]> {
+  getCharacters(): Observable<Character[]> {
     return this.http.get(environment.apiUrl + '/character')
-      .toPromise()
-      .then(response => response.json().data as Character[])
+      .map(response => response.json().data as Character[])
       .catch((error) => {
         this.loggerService.debug(error);
-        return Promise.reject(error.message || error);
+        return Observable.throw(error.json().data.message || error);
       });
   }
 
-  getGroupedCharacters(): Promise<GroupedCharacters[]> {
-    return this.getCharacters().then((characters: Character[]) => {
-      const a = _(characters).groupBy((c: Character) => c.race).map((characterList: Character[], key: string) => {
-        return {
+  getGroupedCharacters(): Observable<GroupedCharacters[]> {
+    return this.getCharacters().map((characters: Character[]) => {
+      return chain(characters).groupBy((c: Character) => c.race).map((characterList: Character[], key: string) => {
+        return <GroupedCharacters>{
           groupName: key,
           groupColor: "#FFCC00",
           characters: characterList
-        }
+        };
       }).value();
-      return a;
     });
   }
 
-  createCharacter(character: Character): Promise<void> {
+  createCharacter(character: Character): Observable<void> {
     return this.http.post(environment.apiUrl + "/character", character)
-      .toPromise()
-      .then<void>()
-      .catch(error => {
+      .catch((error) => {
         this.loggerService.debug(error);
-        return Promise.reject(error.message || error);
+        return Observable.throw(error.json().data.message || error);
       });
   }
 }

@@ -3,10 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { NgPipesModule } from 'ngx-pipes';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 // Mocks
 import { InMemoryDataService } from './mocks/in-memory-data-service';
@@ -19,6 +17,7 @@ import { ModalModule } from '../core/modal/modal.module';
 
 // Services
 import { CharacterDataService } from './services/character-data.service';
+import { SandboxService } from './sandbox.service';
 
 // Components
 import { CharacterViewComponent } from './components/character-view/character-view.component';
@@ -40,13 +39,11 @@ import { CharacterAddFormComponent } from './components/character-add-form/chara
       host: 'localhost',
       apiBase: 'api',
       delay: 500
-    }),
-    NgbModule,
-    BrowserAnimationsModule
+    })
   ],
   declarations: [CharacterListComponent, CharacterViewComponent, CharacterCardComponent, CharacterAddComponent, CharacterAddFormComponent],
   exports: [CharacterViewComponent],
-  providers: [CharacterDataService],
+  providers: [SandboxService, CharacterDataService],
   entryComponents: [CharacterAddFormComponent]
 })
 export class CharactersModule { }

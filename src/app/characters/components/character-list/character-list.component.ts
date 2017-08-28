@@ -1,12 +1,19 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { trigger, animate, transition, style, query, stagger } from '@angular/animations';
-import * as redux from 'redux';
+import {
+  Component,
+  OnInit,
+  Inject
+} from '@angular/core';
+import {
+  trigger,
+  animate,
+  transition,
+  style,
+  query,
+  stagger
+} from '@angular/animations';
+import { Observable } from "rxjs";
 
-import { AppStore } from '../../../store/app.store';
-import { AppState } from '../../../store/app.reducer';
-import * as CharacterActions from '../../store/character.actions';
-
-import { Character } from '../../character.model';
+import { SandboxService, Character } from "../../sandbox.service";
 
 @Component({
   selector: 'app-character-list',
@@ -31,16 +38,13 @@ import { Character } from '../../character.model';
   ]
 })
 export class CharacterListComponent implements OnInit {
-  characters: Character[];
+  characters: Observable<Character[]>;
 
-  constructor( @Inject(AppStore) private store: redux.Store<AppState>) {
-    this.characters = [];
+  constructor(private sandboxService: SandboxService) {
+    this.characters = this.sandboxService.characters$;
   }
 
   ngOnInit() {
-    this.store.subscribe(() => {
-      this.characters = this.store.getState().characters.characterList;
-    });
   }
 
 }
