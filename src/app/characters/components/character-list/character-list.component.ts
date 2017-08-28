@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Store } from 'redux';
+import * as redux from 'redux';
 
 import { AppStore } from '../../../store/app.store';
 import { AppState, getCharacterList } from '../../../store/app.reducer';
@@ -15,7 +15,7 @@ import { Character } from '../../character.model';
 export class CharacterListComponent implements OnInit {
   characters: Character[];
 
-  constructor(@Inject(AppStore) private store: Store<AppState>) {
+  constructor(@Inject(AppStore) private store: redux.Store<AppState>) {
   }
 
   ngOnInit() {

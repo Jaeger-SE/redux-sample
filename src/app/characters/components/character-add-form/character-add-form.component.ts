@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormGroupDirective, NgControl } from '@angular/forms';
-import { Store } from 'redux';
+import * as redux from 'redux';
 
 import { Character } from '../../character.model';
 
@@ -23,7 +23,7 @@ export class CharacterAddFormComponent extends DialogComponent<null, Character> 
   races: string[];
   isPosting: boolean;
 
-  constructor( @Inject(AppStore) private store: Store<AppState>, private modalService: DialogService, fb: FormBuilder, private characterDataService: CharacterDataService) {
+  constructor( @Inject(AppStore) private store: redux.Store<AppState>, private modalService: DialogService, fb: FormBuilder, private characterDataService: CharacterDataService) {
     super(modalService);
     this.isPosting = false;
     this.races = [
