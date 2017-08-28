@@ -13,7 +13,7 @@ import {
 } from '@angular/animations';
 import { Observable } from "rxjs";
 
-import { SandboxService, Character } from "../../sandbox.service";
+import { CharactersSandboxService, Character } from "../../../facade/sandbox/characters-sandbox.service";
 
 @Component({
   selector: 'app-character-list',
@@ -40,8 +40,8 @@ import { SandboxService, Character } from "../../sandbox.service";
 export class CharacterListComponent implements OnInit {
   characters: Observable<Character[]>;
 
-  constructor(private sandboxService: SandboxService) {
-    this.characters = this.sandboxService.characters$;
+  constructor(private charactersSandboxService: CharactersSandboxService) {
+    this.characters = this.charactersSandboxService.characters$;
   }
 
   ngOnInit() {

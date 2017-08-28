@@ -4,7 +4,9 @@ import {
 } from 'redux';
 import {
     Character
-} from '../character.model';
+} from '../../models/character.model';
+
+export * from '../../models/character.model';
 
 export const ADD_CHARACTER = '[Character] Add character';
 export interface AddCharacterAction extends Action {

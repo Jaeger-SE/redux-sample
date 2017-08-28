@@ -16,8 +16,8 @@ import { CoreModule } from '../core/core.module';
 import { ModalModule } from '../core/modal/modal.module';
 
 // Services
-import { CharacterDataService } from './services/character-data.service';
-import { SandboxService } from './sandbox.service';
+import { CharacterDataService } from '../facade/http/character-data.service';
+import { CharactersSandboxService } from '../facade/sandbox/characters-sandbox.service';
 
 // Components
 import { CharacterViewComponent } from './components/character-view/character-view.component';
@@ -43,7 +43,7 @@ import { CharacterAddFormComponent } from './components/character-add-form/chara
   ],
   declarations: [CharacterListComponent, CharacterViewComponent, CharacterCardComponent, CharacterAddComponent, CharacterAddFormComponent],
   exports: [CharacterViewComponent],
-  providers: [SandboxService, CharacterDataService],
+  providers: [CharactersSandboxService, CharacterDataService],
   entryComponents: [CharacterAddFormComponent]
 })
 export class CharactersModule { }

@@ -16,9 +16,9 @@ import { DialogService } from '../../../core/modal/dialog.service';
 import { DialogComponent } from '../../../core/modal/dialog.component';
 
 import {
-  SandboxService,
+  CharactersSandboxService,
   Character
-} from '../../sandbox.service';
+} from '../../../facade/sandbox/characters-sandbox.service';
 
 @Component({
   selector: 'app-character-add-form',
@@ -31,7 +31,7 @@ export class CharacterAddFormComponent extends DialogComponent<null, Character> 
   isPosting: boolean;
   characters$: Observable<Character[]>;
 
-  constructor(private modalService: DialogService, fb: FormBuilder, private sandboxService: SandboxService) {
+  constructor(private modalService: DialogService, fb: FormBuilder, private charactersSandboxService: CharactersSandboxService) {
     super(modalService);
     this.isPosting = false;
     this.races = [
@@ -48,7 +48,7 @@ export class CharacterAddFormComponent extends DialogComponent<null, Character> 
   }
 
   ngOnInit() {
-    this.characters$ = this.sandboxService.characters$;
+    this.characters$ = this.charactersSandboxService.characters$;
   }
 
   cancel(): void {
@@ -58,7 +58,7 @@ export class CharacterAddFormComponent extends DialogComponent<null, Character> 
   create(): void {
     this.isPosting = true;
     var character = this.form.value as Character;
-    this.sandboxService.addCharacter(character).subscribe(
+    this.charactersSandboxService.addCharacter(character).subscribe(
       () => {
         this.close();
       },

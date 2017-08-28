@@ -10,18 +10,18 @@ import {
 
 // Redux
 import { AppStore } from '../store/app.store';
-import { AppState } from '../store/app.reducer';
-import * as CharacterActions from './store/character.actions';
+import { AppState } from '../store/reducers/app.reducer';
+import * as CharacterActions from '../store/actions/character.actions';
 
 import {
   Character,
   CharacterDataService
-} from "./services/character-data.service";
+} from "../http/character-data.service";
 
 export { Character };
 
 @Injectable()
-export class SandboxService {
+export class CharactersSandboxService {
 
   private _characters: BehaviorSubject<Character[]>;
 

@@ -5,11 +5,11 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
   AppState,
   default as reducer
-} from './store/app.reducer';
+} from './facade/store/reducers/app.reducer';
 import {
   AppStore,
   appStoreProviders
-} from './store/app.store';
+} from './facade/store/app.store';
 
 import { AppComponent } from './app.component';
 import { CharactersModule } from './characters/characters.module';

@@ -7,10 +7,10 @@ import 'rxjs/add/operator/map';
 import { chain } from "lodash";
 
 import { environment } from '../../../environments/environment'
-import { Character, GroupedCharacters } from '../character.model';
+import { Character, GroupedCharacters } from '../models/character.model';
 import { LoggerService } from '../../core/services/logger.service';
 
-export { Character, GroupedCharacters };
+export * from '../models/character.model';;
 
 @Injectable()
 export class CharacterDataService {

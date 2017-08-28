@@ -3,7 +3,7 @@ import {
   OnInit,
   Input
 } from '@angular/core';
-import { Character } from '../../character.model';
+import { Character } from '../../../facade/models/character.model';
 
 @Component({
   selector: 'app-character-card',
