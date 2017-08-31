@@ -8,7 +8,7 @@ export class LoggerService {
 
   debug(error: any): void {
     if (environment.debug) {
-      console.log('An error occurred', error)
+      console.log('An error occurred', error);
     }
   }
 }

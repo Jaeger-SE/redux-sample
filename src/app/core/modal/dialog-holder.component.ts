@@ -1,10 +1,22 @@
-import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, Type } from "@angular/core";
-import { trigger, animate, transition, style, query } from '@angular/animations';
-import { Observable } from "rxjs";
+import {
+    Component,
+    ViewChild,
+    ViewContainerRef,
+    ComponentFactoryResolver,
+    Type
+} from '@angular/core';
+import {
+    trigger,
+    animate,
+    transition,
+    style,
+    query
+} from '@angular/animations';
+import { Observable } from 'rxjs/Observable';
 
-import { DialogComponent } from "./dialog.component";
-import { DialogWrapperComponent } from "./dialog-wrapper.component";
-import { DialogOptions } from "./dialog.service";
+import { DialogComponent } from './dialog.component';
+import { DialogWrapperComponent } from './dialog-wrapper.component';
+import { DialogOptions } from './dialog.service';
 
 export const fadeAnimation =
 
@@ -37,7 +49,7 @@ export const fadeAnimation =
     animations: [
         fadeAnimation
     ],
-    selector: 'dialog-holder',
+    selector: 'app-dialog-holder',
     template: '<ng-template #element></ng-template>',
 })
 export class DialogHolderComponent {
@@ -68,14 +80,13 @@ export class DialogHolderComponent {
      */
     addDialog<T, T1>(component: Type<DialogComponent<T, T1>>, data?: T, options?: DialogOptions): Observable<T1> {
         options = options || <DialogOptions>{};
-        let factory = this.resolver.resolveComponentFactory(DialogWrapperComponent);
-        let componentRef = this.element.createComponent(factory, options.index);
-        let dialogWrapper: DialogWrapperComponent = <DialogWrapperComponent>componentRef.instance;
-        let _component: DialogComponent<T, T1> = dialogWrapper.addComponent(component);
+        const factory = this.resolver.resolveComponentFactory(DialogWrapperComponent);
+        const componentRef = this.element.createComponent(factory, options.index);
+        const dialogWrapper: DialogWrapperComponent = <DialogWrapperComponent>componentRef.instance;
+        const _component: DialogComponent<T, T1> = dialogWrapper.addComponent(component);
         if (typeof (options.index) !== 'undefined') {
             this.dialogs.splice(options.index, 0, _component);
-        }
-        else {
+        } else {
             this.dialogs.push(_component);
         }
         setTimeout(() => {
@@ -104,7 +115,7 @@ export class DialogHolderComponent {
      * @param {DialogComponent} component
      */
     removeDialog(component: DialogComponent<any, any>) {
-        let element = component.wrapper.container.nativeElement;
+        const element = component.wrapper.container.nativeElement;
 
         element.classList.remove('show');
         element.classList.remove('in');
@@ -114,7 +125,7 @@ export class DialogHolderComponent {
     }
 
     private _removeElement(component) {
-        let index = this.dialogs.indexOf(component);
+        const index = this.dialogs.indexOf(component);
         if (index > -1) {
             this.element.remove(index);
             this.dialogs.splice(index, 1);

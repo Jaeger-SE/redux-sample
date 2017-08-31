@@ -11,9 +11,12 @@ import {
   query,
   stagger
 } from '@angular/animations';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs/Observable';
 
-import { CharactersSandboxService, Character } from "../../../facade/sandbox/characters-sandbox.service";
+import {
+  CharactersSandboxService,
+  Character
+} from '../../../facade/sandbox/characters-sandbox.service';
 
 @Component({
   selector: 'app-character-list',

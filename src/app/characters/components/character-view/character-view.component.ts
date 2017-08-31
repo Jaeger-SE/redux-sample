@@ -1,4 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Inject
+} from '@angular/core';
 
 @Component({
   selector: 'app-character-view',

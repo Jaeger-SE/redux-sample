@@ -4,13 +4,13 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { chain } from "lodash";
+import { chain } from 'lodash';
 
-import { environment } from '../../../environments/environment'
+import { environment } from '../../../environments/environment';
 import { Character, GroupedCharacters } from '../models/character.model';
 import { LoggerService } from '../../core/services/logger.service';
 
-export * from '../models/character.model';;
+export * from '../models/character.model';
 
 @Injectable()
 export class CharacterDataService {
@@ -31,7 +31,7 @@ export class CharacterDataService {
       return chain(characters).groupBy((c: Character) => c.race).map((characterList: Character[], key: string) => {
         return <GroupedCharacters>{
           groupName: key,
-          groupColor: "#FFCC00",
+          groupColor: '#FFCC00',
           characters: characterList
         };
       }).value();
@@ -39,7 +39,7 @@ export class CharacterDataService {
   }
 
   createCharacter(character: Character): Observable<void> {
-    return this.http.post(environment.apiUrl + "/character", character)
+    return this.http.post(environment.apiUrl + '/character', character)
       .catch((error) => {
         this.loggerService.debug(error);
         return Observable.throw(error.json().data.message || error);

@@ -6,11 +6,11 @@ import {
   EmbeddedViewRef,
   Type,
   Optional
-} from "@angular/core";
-import { Observable } from "rxjs";
+} from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
-import { DialogHolderComponent } from "./dialog-holder.component";
-import { DialogComponent } from "./dialog.component";
+import { DialogHolderComponent } from './dialog-holder.component';
+import { DialogComponent } from './dialog.component';
 
 export interface DialogOptions {
   index?: number;
@@ -45,7 +45,8 @@ export class DialogService {
    * @param {Injector} injector
    * @param {DialogServiceConfig} config
    */
-  constructor(private resolver: ComponentFactoryResolver, private applicationRef: ApplicationRef, private injector: Injector, @Optional() config: DialogServiceConfig) {
+  constructor(private resolver: ComponentFactoryResolver, private applicationRef: ApplicationRef,
+    private injector: Injector, @Optional() config: DialogServiceConfig) {
     this.container = config && config.container;
   }
 
@@ -87,12 +88,12 @@ export class DialogService {
    */
   private createDialogHolder(): DialogHolderComponent {
 
-    let componentFactory = this.resolver.resolveComponentFactory(DialogHolderComponent);
+    const componentFactory = this.resolver.resolveComponentFactory(DialogHolderComponent);
 
-    let componentRef = componentFactory.create(this.injector);
-    let componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+    const componentRef = componentFactory.create(this.injector);
+    const componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
     if (!this.container) {
-      let componentRootViewContainer = this.applicationRef['_rootComponents'][0];
+      const componentRootViewContainer = this.applicationRef['_rootComponents'][0];
       this.container = (componentRootViewContainer.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
     }
     this.applicationRef.attachView(componentRef.hostView);

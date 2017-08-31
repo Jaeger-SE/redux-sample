@@ -21,7 +21,7 @@ export const addCharacter: ActionCreator<AddCharacterAction> =
 
 export const LOAD_CHARACTER = '[Character] Load character';
 export interface LoadCharacterAction extends Action {
-    characterList: Character[]
+    characterList: Character[];
 }
 export const loadCharacter: ActionCreator<LoadCharacterAction> =
     (characterList: Character[]) => ({

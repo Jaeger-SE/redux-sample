@@ -2,11 +2,13 @@ import {
   Injectable,
   Inject
 } from '@angular/core';
-import * as redux from "redux";
+import * as redux from 'redux';
 import {
-  BehaviorSubject,
+  BehaviorSubject
+} from 'rxjs/BehaviorSubject';
+import {
   Observable
-} from "rxjs";
+} from 'rxjs/Observable';
 
 // Redux
 import { AppStore } from '../store/app.store';
@@ -16,7 +18,7 @@ import * as CharacterActions from '../store/actions/character.actions';
 import {
   Character,
   CharacterDataService
-} from "../http/character-data.service";
+} from '../http/character-data.service';
 
 export { Character };
 
@@ -33,7 +35,7 @@ export class CharactersSandboxService {
 
     this.characterDataService.getCharacters().subscribe(res => {
       this._characters.next(res);
-    })
+    });
   }
 
   addCharacter(character: Character): Observable<void> {

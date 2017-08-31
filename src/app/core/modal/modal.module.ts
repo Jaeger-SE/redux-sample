@@ -1,10 +1,10 @@
 import { NgModule, ModuleWithProviders, ComponentFactoryResolver, ApplicationRef, Injector } from '@angular/core';
-import { CommonModule } from "@angular/common";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { DialogHolderComponent } from "./dialog-holder.component";
-import { DialogWrapperComponent } from "./dialog-wrapper.component";
-import { DialogService, DialogServiceConfig } from "./dialog.service";
+import { DialogHolderComponent } from './dialog-holder.component';
+import { DialogWrapperComponent } from './dialog-wrapper.component';
+import { DialogService, DialogServiceConfig } from './dialog.service';
 
 /**
  * Dialog service factory. Creates dialog service with options
@@ -14,7 +14,8 @@ import { DialogService, DialogServiceConfig } from "./dialog.service";
  * @param { DialogServiceConfig } options
  * @return { DialogService }
  */
-export function dialogServiceFactory(resolver: ComponentFactoryResolver, applicationRef: ApplicationRef, injector: Injector, options: DialogServiceConfig) {
+export function dialogServiceFactory(resolver: ComponentFactoryResolver, applicationRef: ApplicationRef,
+  injector: Injector, options: DialogServiceConfig) {
   return new DialogService(resolver, applicationRef, injector, options);
 }
 

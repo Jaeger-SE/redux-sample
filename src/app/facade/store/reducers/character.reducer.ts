@@ -6,7 +6,7 @@ export { Character };
 
 export interface CharactersState {
   characterList: Character[];
-};
+}
 
 const initialState: CharactersState = {
   characterList: []
@@ -23,7 +23,7 @@ export const CharacterReducer = function (state: CharactersState = initialState,
       const characterList: Character[] = (<CharacterActions.LoadCharacterAction>action).characterList;
       return {
         characterList: characterList
-      }
+      };
     default:
       return state;
   }

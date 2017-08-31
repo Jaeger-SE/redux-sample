@@ -1,10 +1,18 @@
-import { Component, HostListener, ViewContainerRef, ViewChild, ComponentFactoryResolver, ReflectiveInjector, Type } from '@angular/core';
+import {
+    Component,
+    HostListener,
+    ViewContainerRef,
+    ViewChild,
+    ComponentFactoryResolver,
+    ReflectiveInjector,
+    Type
+} from '@angular/core';
 
-import { DialogComponent } from "./dialog.component";
-import { DialogService } from "./dialog.service";
+import { DialogComponent } from './dialog.component';
+import { DialogService } from './dialog.service';
 
 @Component({
-    selector: 'dialog-wrapper',
+    selector: 'app-dialog-wrapper',
     template: `
     <div #container class="modal" role="dialog">
         <div class="modal-background"></div>
@@ -48,9 +56,9 @@ export class DialogWrapperComponent {
      * @return {DialogComponent}
      */
     addComponent<T, T1>(component: Type<DialogComponent<T, T1>>) {
-        let factory = this.resolver.resolveComponentFactory(component);
-        let injector = ReflectiveInjector.fromResolvedProviders([], this.element.injector);
-        let componentRef = factory.create(injector);
+        const factory = this.resolver.resolveComponentFactory(component);
+        const injector = ReflectiveInjector.fromResolvedProviders([], this.element.injector);
+        const componentRef = factory.create(injector);
         this.element.insert(componentRef.hostView);
         this.content = <DialogComponent<T, T1>>componentRef.instance;
         this.content.wrapper = this;
@@ -78,9 +86,11 @@ export class DialogWrapperComponent {
 
     @HostListener('window:keyup', ['$event'])
     onKeyPress(e: KeyboardEvent) {
-        if (!this.handleEscapePressed)
+        if (!this.handleEscapePressed) {
             return;
-        if (e.keyCode == 27)
+        }
+        if (e.keyCode === 27) {
             this.dialogService.removeDialog(this.content);
+        }
     }
 }
