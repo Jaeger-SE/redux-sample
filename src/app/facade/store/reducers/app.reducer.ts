@@ -1,21 +1,15 @@
-import {
-    Reducer,
-    combineReducers
-} from 'redux';
+import { Reducer, combineReducers } from 'redux';
 
-import {
-    CharactersState,
-    CharacterReducer
-} from './character.reducer';
+import { CharactersState, CharacterReducer } from './character.reducer';
 
 export * from './character.reducer';
 
 export interface AppState {
-    characters: CharactersState;
+  characters: CharactersState;
 }
 
 const rootReducer: Reducer<AppState> = combineReducers<AppState>({
-    characters: CharacterReducer
+  characters: CharacterReducer
 });
 
 export default rootReducer;

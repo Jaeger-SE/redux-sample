@@ -4,10 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LoggerService } from './services/logger.service';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   providers: [LoggerService]
 })
-export class CoreModule {
-}
+export class CoreModule {}

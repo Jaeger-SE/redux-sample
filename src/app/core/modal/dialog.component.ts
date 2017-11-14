@@ -1,7 +1,8 @@
 import { OnDestroy } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
-import { DialogWrapperComponent } from "./dialog-wrapper.component";
-import { DialogService } from "./dialog.service";
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
+import { DialogWrapperComponent } from './dialog-wrapper.component';
+import { DialogService } from './dialog.service';
 
 /**
  * Abstract dialog
@@ -9,7 +10,6 @@ import { DialogService } from "./dialog.service";
  * @template T1 - dialog result
  */
 export class DialogComponent<T, T1> implements OnDestroy {
-
   /**
    * Observer to return result from dialog
    */
@@ -30,7 +30,7 @@ export class DialogComponent<T, T1> implements OnDestroy {
    * Constructor
    * @param {DialogService} dialogService - instance of DialogService
    */
-  constructor(protected dialogService: DialogService) { }
+  constructor(protected dialogService: DialogService) {}
 
   /**
    *
@@ -39,16 +39,16 @@ export class DialogComponent<T, T1> implements OnDestroy {
    */
   fillData(data: T): Observable<T1> {
     data = data || <T>{};
-    let keys = Object.keys(data);
+    const keys = Object.keys(data);
     for (let i = 0, length = keys.length; i < length; i++) {
-      let key = keys[i];
+      const key = keys[i];
       this[key] = data[key];
     }
-    return Observable.create((observer) => {
+    return Observable.create(observer => {
       this.observer = observer;
       return () => {
         this.close();
-      }
+      };
     });
   }
 

@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { NgPipesModule } from 'ngx-pipes';
 
@@ -41,9 +41,15 @@ import { CharacterAddFormComponent } from './components/character-add-form/chara
       delay: 500
     })
   ],
-  declarations: [CharacterListComponent, CharacterViewComponent, CharacterCardComponent, CharacterAddComponent, CharacterAddFormComponent],
+  declarations: [
+    CharacterListComponent,
+    CharacterViewComponent,
+    CharacterCardComponent,
+    CharacterAddComponent,
+    CharacterAddFormComponent
+  ],
   exports: [CharacterViewComponent],
   providers: [CharactersSandboxService, CharacterDataService],
   entryComponents: [CharacterAddFormComponent]
 })
-export class CharactersModule { }
+export class CharactersModule {}

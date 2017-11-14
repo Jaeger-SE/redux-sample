@@ -6,12 +6,13 @@ describe('CharacterAddComponent', () => {
   let component: CharacterAddComponent;
   let fixture: ComponentFixture<CharacterAddComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CharacterAddComponent ]
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        declarations: [CharacterAddComponent]
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CharacterAddComponent);
