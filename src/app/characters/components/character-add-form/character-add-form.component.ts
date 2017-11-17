@@ -8,9 +8,7 @@ import {
 } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
-import { DialogService } from '../../../core/modal/dialog.service';
-import { DialogComponent } from '../../../core/modal/dialog.component';
-
+import { ModalComponent } from '../../../core/modal/modal.component';
 import {
   CharactersSandboxService,
   Character
@@ -21,7 +19,7 @@ import {
   templateUrl: './character-add-form.component.html',
   styleUrls: ['./character-add-form.component.scss']
 })
-export class CharacterAddFormComponent extends DialogComponent<null, Character>
+export class CharacterAddFormComponent extends ModalComponent<null, Character>
   implements OnInit {
   form: FormGroup;
   races: string[];
@@ -29,11 +27,10 @@ export class CharacterAddFormComponent extends DialogComponent<null, Character>
   characters$: Observable<Character[]>;
 
   constructor(
-    private modalService: DialogService,
     fb: FormBuilder,
     private charactersSandboxService: CharactersSandboxService
   ) {
-    super(modalService);
+    super();
     this.isPosting = false;
     this.races = ['saiyan', 'human', 'namek', 'human-saiyan'];
     this.form = fb.group({

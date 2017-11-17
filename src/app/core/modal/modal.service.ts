@@ -1,36 +1,26 @@
 import {
-  Injectable,
-  ComponentFactoryResolver,
   ApplicationRef,
-  Injector,
+  ComponentFactoryResolver,
   EmbeddedViewRef,
-  Type,
-  Optional
+  Injector,
+  Optional,
+  Type
 } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { DialogHolderComponent } from './dialog-holder.component';
-import { DialogComponent } from './dialog.component';
+import { ModalHolderComponent } from './modal-holder.component';
+import { IModalComponent, ModalOptions } from './modal.domain';
 
-export interface DialogOptions {
-  index?: number;
-  autoCloseTimeout?: number;
-  closeByClickingOutside?: boolean;
-  closeByEscapeKeyPressed?: boolean;
-  backdropColor?: string;
-}
-
-export class DialogServiceConfig {
+export class ModalServiceConfig {
   container: HTMLElement = null;
 }
 
-@Injectable()
-export class DialogService {
+export class ModalService {
   /**
    * Placeholder of modal dialogs
    * @type {DialogHolderComponent}
    */
-  private dialogHolderComponent: DialogHolderComponent;
+  private dialogHolderComponent: ModalHolderComponent;
 
   /**
    * HTML container for dialogs
@@ -39,36 +29,33 @@ export class DialogService {
   private container: HTMLElement;
 
   /**
-   * @param {ComponentFactoryResolver} resolver
-   * @param {ApplicationRef} applicationRef
-   * @param {Injector} injector
-   * @param {DialogServiceConfig} config
-   */
+ * Constructor
+ */
   constructor(
     private resolver: ComponentFactoryResolver,
     private applicationRef: ApplicationRef,
     private injector: Injector,
-    @Optional() config: DialogServiceConfig
+    @Optional() config: ModalServiceConfig
   ) {
     this.container = config && config.container;
   }
 
   /**
    * Adds dialog
-   * @param {Type<DialogComponent<T, T1>>} component
-   * @param {T?} data
+   * @param {Type<DialogComponent<TData, TResult>>} component
+   * @param {TData?} data
    * @param {DialogOptions?} options
-   * @return {Observable<T1>}
+   * @return {Observable<TResult>}
    */
-  addDialog<T, T1>(
-    component: Type<DialogComponent<T, T1>>,
-    data?: T,
-    options?: DialogOptions
-  ): Observable<T1> {
+  addDialog<TData, TResult>(
+    component: Type<IModalComponent<TData, TResult>>,
+    data?: TData,
+    options?: ModalOptions
+  ): Observable<TResult> {
     if (!this.dialogHolderComponent) {
       this.dialogHolderComponent = this.createDialogHolder();
     }
-    return this.dialogHolderComponent.addDialog<T, T1>(
+    return this.dialogHolderComponent.addDialog<TData, TResult>(
       component,
       data,
       options
@@ -76,30 +63,12 @@ export class DialogService {
   }
 
   /**
-   * Hides and removes dialog from DOM
-   * @param {DialogComponent} component
-   */
-  removeDialog(component: DialogComponent<any, any>): void {
-    if (!this.dialogHolderComponent) {
-      return;
-    }
-    this.dialogHolderComponent.removeDialog(component);
-  }
-
-  /**
-   * Closes all dialogs
-   */
-  removeAll(): void {
-    this.dialogHolderComponent.clear();
-  }
-
-  /**
    * Creates and add to DOM dialog holder component
    * @return {DialogHolderComponent}
    */
-  private createDialogHolder(): DialogHolderComponent {
+  private createDialogHolder(): ModalHolderComponent {
     const componentFactory = this.resolver.resolveComponentFactory(
-      DialogHolderComponent
+      ModalHolderComponent
     );
 
     const componentRef = componentFactory.create(this.injector);

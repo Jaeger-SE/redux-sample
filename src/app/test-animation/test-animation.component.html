@@ -1,0 +1,77 @@
+<!-- <div [@popOverState]="stateName">
+  <p>Hello! I'm a helpful message.</p>
+</div>
+<button (click)="toggle()">Toggle PopOver</button> -->
+
+
+<div class="modal is-active in" role="dialog" [@popOverState]="stateName">
+  <div class="modal-background"></div>
+
+  <div class="modal-content">
+    <div class="box">
+      <!-- <form novalidate="" > -->
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Name</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <p class="control is-expanded has-icons-left">
+              <input class="input" placeholder="Name">
+              <span class="icon is-small is-left">
+                <i class="fa fa-user"></i>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control is-expanded has-icons-left">
+              <input class="input" placeholder="@tag">
+              <span class="icon is-small is-left">
+                <i class="fa fa-twitter"></i>
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Race</label>
+        </div>
+        <div class="field-body">
+          <div class="field is-6">
+            <div class="control">
+              <div class="select is-fullwidth">
+                <select>
+                  <option value="saiyan">saiyan</option>
+                  <option value="human">human</option>
+                  <option value="namek">namek</option>
+                  <option value="human-saiyan">human-saiyan</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field is-horizontal">
+        <div class="field-label">
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <button class="button is-primary" disabled="">
+                Create
+              </button>
+              <button class="button" (click)="toggle()">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- </form> -->
+    </div>
+  </div>
+  <button class="modal-close is-large"></button>
+</div>

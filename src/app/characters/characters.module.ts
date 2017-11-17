@@ -11,9 +11,8 @@ import { InMemoryDataService } from './mocks/in-memory-data-service';
 // Load environment variables
 import { environment } from '../../environments/environment';
 
-// Core
+// Modules
 import { CoreModule } from '../core/core.module';
-import { ModalModule } from '../core/modal/modal.module';
 
 // Services
 import { CharacterDataService } from '../facade/http/character-data.service';
@@ -31,7 +30,6 @@ import { CharacterAddFormComponent } from './components/character-add-form/chara
     CommonModule,
     HttpModule,
     CoreModule,
-    ModalModule,
     FormsModule,
     NgPipesModule,
     ReactiveFormsModule,

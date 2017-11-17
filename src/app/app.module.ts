@@ -10,10 +10,11 @@ import { AppStore, appStoreProviders } from './facade/store/app.store';
 
 import { AppComponent } from './app.component';
 import { CharactersModule } from './characters/characters.module';
+import { TestAnimationComponent } from './test-animation/test-animation.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, CharactersModule, BrowserAnimationsModule],
+  declarations: [AppComponent, TestAnimationComponent],
+  imports: [BrowserModule, BrowserAnimationsModule, CharactersModule],
   bootstrap: [AppComponent],
   providers: [appStoreProviders]
 })

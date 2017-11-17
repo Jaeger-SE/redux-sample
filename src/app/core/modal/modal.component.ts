@@ -1,44 +1,48 @@
+import { Input } from '@angular/core';
+
 import { OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
-import { DialogWrapperComponent } from './dialog-wrapper.component';
-import { DialogService } from './dialog.service';
+
+import { IModalComponent, IModalWrapperComponent } from './modal.domain';
 
 /**
  * Abstract dialog
- * @template T - dialog data;
- * @template T1 - dialog result
+ * @template TIn - dialog data;
+ * @template TOut - dialog result
  */
-export class DialogComponent<T, T1> implements OnDestroy {
+export class ModalComponent<TIn, TOut>
+  implements OnDestroy, IModalComponent<TIn, TOut> {
   /**
    * Observer to return result from dialog
    */
-  private observer: Observer<T1>;
-
-  /**
-   * Dialog result
-   * @type {T1}
-   */
-  protected result: T1;
+  private observer: Observer<TOut>;
 
   /**
    * Dialog wrapper (modal placeholder)
    */
-  wrapper: DialogWrapperComponent;
+  wrapper: IModalWrapperComponent;
+
+  /**
+   * Dialog result
+   * @type {TOut}
+   */
+  protected result: TOut;
+
+  @Input() public closeHandler: (wrapper: IModalComponent<TIn, TOut>) => void;
 
   /**
    * Constructor
-   * @param {DialogService} dialogService - instance of DialogService
    */
-  constructor(protected dialogService: DialogService) {}
+  constructor() {}
 
   /**
    *
-   * @param {T} data
-   * @return {Observable<T1>}
+   * @param {Tin} data
+   * @return {Observable<TOut>}
    */
-  fillData(data: T): Observable<T1> {
-    data = data || <T>{};
+  fillData(data: TIn): Observable<TOut> {
+    data = data || <TIn>{};
     const keys = Object.keys(data);
     for (let i = 0, length = keys.length; i < length; i++) {
       const key = keys[i];
@@ -56,7 +60,7 @@ export class DialogComponent<T, T1> implements OnDestroy {
    * Closes dialog
    */
   close(): void {
-    this.dialogService.removeDialog(this);
+    this.closeHandler(this);
   }
 
   /**
