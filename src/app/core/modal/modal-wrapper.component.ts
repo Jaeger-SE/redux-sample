@@ -1,62 +1,63 @@
 import {
   Component,
-  HostListener,
-  Input,
-  ViewContainerRef,
-  ViewChild,
   ComponentFactoryResolver,
+  Input,
   ReflectiveInjector,
-  Type
+  Type,
+  ViewChild,
+  ViewContainerRef
 } from '@angular/core';
 import {
-  trigger,
   animate,
-  transition,
   state,
   style,
-  query
+  transition,
+  trigger
 } from '@angular/animations';
 
-import { fadeIn } from '../../animations/animations';
-
 import { IModalComponent, IModalWrapperComponent } from './modal.domain';
+
+const fadeInDuration = 300;
+const fadeOutDuration = 300;
 
 @Component({
   animations: [
     trigger('fadeAnimation', [
-      state('init', style({ opacity: 0 })),
       state('hide', style({ opacity: 0 })),
       state('show', style({ opacity: 1 })),
 
-      transition('show => hide', animate('600ms ease-out')),
-      transition('hide => show', animate('1000ms ease-in'))
+      transition('show => hide', animate(fadeOutDuration + 'ms ease-out')),
+      transition('hide => show', animate(fadeInDuration + 'ms ease-in'))
     ])
   ],
   template: `
-          <div #container class="modal-content" [@fadeAnimation]="stateName">
+          <div #container class="modal-content" [@fadeAnimation]="stateName" [hidden]="isCollapsed">
               <ng-template #element></ng-template>
           </div>
   `
 })
 export class ModalWrapperComponent implements IModalWrapperComponent {
-  public stateName: string;
-
-  @ViewChild('container') public container;
+  @ViewChild('container') public container: ViewContainerRef;
   @ViewChild('element', { read: ViewContainerRef })
   public element: ViewContainerRef;
 
-  constructor(private resolver: ComponentFactoryResolver) {
-    this.stateName = 'init';
-  }
-
   @Input() public closeHandler: (wrapper: IModalComponent<any, any>) => void;
 
-  /**
-       * Adds content dialog component to wrapper
-       * @param {Type<DialogComponent>} component
-       * @return {DialogComponent}
-       */
-  loadComponent<T, T1>(componentType: Type<IModalComponent<T, T1>>) {
+  private _isCollapsed: boolean;
+  public get isCollapsed(): boolean {
+    return this._isCollapsed;
+  }
+  public set isCollapsed(isCollapsed: boolean) {
+    this._isCollapsed = isCollapsed;
+  }
+
+  constructor(private resolver: ComponentFactoryResolver) {
+    this._isCollapsed = false;
+  }
+
+  loadComponent<TIn, TResult>(
+    componentType: Type<IModalComponent<TIn, TResult>>
+  ): IModalComponent<TIn, TResult> {
     const factory = this.resolver.resolveComponentFactory(componentType);
     const injector = ReflectiveInjector.fromResolvedProviders(
       [],
@@ -64,7 +65,6 @@ export class ModalWrapperComponent implements IModalWrapperComponent {
     );
     const componentRef = factory.create(injector);
     this.element.insert(componentRef.hostView);
-    this.stateName = 'show';
     const component = componentRef.instance;
     component.wrapper = this;
     return component;

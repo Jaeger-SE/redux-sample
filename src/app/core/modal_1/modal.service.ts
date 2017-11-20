@@ -20,13 +20,13 @@ export class ModalService {
    * Placeholder of modal dialogs
    * @type {DialogHolderComponent}
    */
-  private _modalHolderComponent: ModalHolderComponent;
+  private dialogHolderComponent: ModalHolderComponent;
 
   /**
    * HTML container for dialogs
    * type {HTMLElement}
    */
-  private _modalContainerHtmlElement: HTMLElement;
+  private container: HTMLElement;
 
   /**
  * Constructor
@@ -37,7 +37,7 @@ export class ModalService {
     private injector: Injector,
     @Optional() config: ModalServiceConfig
   ) {
-    this._modalContainerHtmlElement = config && config.container;
+    this.container = config && config.container;
   }
 
   /**
@@ -52,10 +52,10 @@ export class ModalService {
     data?: TData,
     options?: ModalOptions
   ): Observable<TResult> {
-    if (!this._modalHolderComponent) {
-      this._modalHolderComponent = this.createDialogHolder();
+    if (!this.dialogHolderComponent) {
+      this.dialogHolderComponent = this.createDialogHolder();
     }
-    return this._modalHolderComponent.addDialog<TData, TResult>(
+    return this.dialogHolderComponent.addDialog<TData, TResult>(
       component,
       data,
       options
@@ -74,11 +74,11 @@ export class ModalService {
     const componentRef = componentFactory.create(this.injector);
     const componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>)
       .rootNodes[0] as HTMLElement;
-    if (!this._modalContainerHtmlElement) {
+    if (!this.container) {
       const componentRootViewContainer = this.applicationRef[
         '_rootComponents'
       ][0];
-      this._modalContainerHtmlElement = (componentRootViewContainer.hostView as EmbeddedViewRef<
+      this.container = (componentRootViewContainer.hostView as EmbeddedViewRef<
         any
       >).rootNodes[0] as HTMLElement;
     }
@@ -87,7 +87,7 @@ export class ModalService {
     componentRef.onDestroy(() => {
       this.applicationRef.detachView(componentRef.hostView);
     });
-    this._modalContainerHtmlElement.appendChild(componentRootNode);
+    this.container.appendChild(componentRootNode);
 
     return componentRef.instance;
   }

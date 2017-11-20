@@ -1,5 +1,4 @@
 import { Type } from '@angular/core';
-
 import { Observable } from 'rxjs/Observable';
 
 export interface ModalOptions {
@@ -10,21 +9,16 @@ export interface ModalOptions {
   backdropColor?: string;
 }
 
-export interface IModalHolderComponent {
-  addDialog<TIn, TResult>(
-    component: Type<IModalComponent<TIn, TResult>>,
-    data?: TIn,
-    options?: ModalOptions
-  ): Observable<TResult>;
-
-  removeDialog(component: IModalComponent<any, any>): void;
-}
-
 export interface IModalWrapperComponent {
+  /**
+     * Link container DOM element
+     */
+  container;
+
+  isVisible: boolean;
   isCollapsed: boolean;
-  loadComponent<TIn, TResult>(
-    componentType: Type<IModalComponent<TIn, TResult>>
-  ): IModalComponent<TIn, TResult>;
+
+  loadComponent<T, T1>(componentType: Type<IModalComponent<T, T1>>);
 }
 
 export interface IModalComponent<TIn, TOut> {
@@ -41,5 +35,4 @@ export interface IModalComponent<TIn, TOut> {
    * @return {Observable<TOut>}
    */
   fillData(data: TIn): Observable<TOut>;
-  close(): void;
 }

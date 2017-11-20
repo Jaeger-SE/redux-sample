@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
-import { ModalComponent } from '../../../core/modal/modal.component';
+import { ModalBaseComponent } from '../../../core/modal/modal-base.component';
 import {
   CharactersSandboxService,
   Character
@@ -19,7 +19,7 @@ import {
   templateUrl: './character-add-form.component.html',
   styleUrls: ['./character-add-form.component.scss']
 })
-export class CharacterAddFormComponent extends ModalComponent<null, Character>
+export class CharacterAddFormComponent extends ModalBaseComponent<null, Character>
   implements OnInit {
   form: FormGroup;
   races: string[];
