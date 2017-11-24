@@ -1,8 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Inject
-} from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -10,11 +6,9 @@ import {
   FormGroupDirective,
   NgControl
 } from '@angular/forms';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs/Observable';
 
-import { DialogService } from '../../../core/modal/dialog.service';
-import { DialogComponent } from '../../../core/modal/dialog.component';
-
+import { ModalBaseComponent } from '../../../core/modal/modal-base.component';
 import {
   CharactersSandboxService,
   Character
@@ -25,23 +19,22 @@ import {
   templateUrl: './character-add-form.component.html',
   styleUrls: ['./character-add-form.component.scss']
 })
-export class CharacterAddFormComponent extends DialogComponent<null, Character> implements OnInit {
+export class CharacterAddFormComponent extends ModalBaseComponent<null, Character>
+  implements OnInit {
   form: FormGroup;
   races: string[];
   isPosting: boolean;
   characters$: Observable<Character[]>;
 
-  constructor(private modalService: DialogService, fb: FormBuilder, private charactersSandboxService: CharactersSandboxService) {
-    super(modalService);
+  constructor(
+    fb: FormBuilder,
+    private charactersSandboxService: CharactersSandboxService
+  ) {
+    super();
     this.isPosting = false;
-    this.races = [
-      "saiyan",
-      "human",
-      "namek",
-      "human-saiyan"
-    ]
+    this.races = ['saiyan', 'human', 'namek', 'human-saiyan'];
     this.form = fb.group({
-      name: ["", Validators.required],
+      name: ['', Validators.required],
       race: [undefined, Validators.required],
       tag: [undefined, Validators.maxLength(10)]
     });
@@ -57,7 +50,7 @@ export class CharacterAddFormComponent extends DialogComponent<null, Character> 
 
   create(): void {
     this.isPosting = true;
-    var character = this.form.value as Character;
+    const character = this.form.value as Character;
     this.charactersSandboxService.addCharacter(character).subscribe(
       () => {
         this.close();
@@ -65,6 +58,7 @@ export class CharacterAddFormComponent extends DialogComponent<null, Character> 
       (error: any) => {
         console.log(error);
         this.isPosting = false;
-      })
+      }
+    );
   }
 }

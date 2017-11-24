@@ -1,10 +1,7 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 // Import modal dependencies
-import { DialogService } from '../../../core/modal/dialog.service';
+import { ModalService } from '../../../core/modal/modal.service';
 
 // Import component used as content in the modal
 import { CharacterAddFormComponent } from '../character-add-form/character-add-form.component';
@@ -15,11 +12,9 @@ import { CharacterAddFormComponent } from '../character-add-form/character-add-f
   styleUrls: ['./character-add.component.scss']
 })
 export class CharacterAddComponent implements OnInit {
+  constructor(private modalService: ModalService) {}
 
-  constructor(private modalService: DialogService) { }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   create(): void {
     this.modalService.addDialog(CharacterAddFormComponent, undefined, {

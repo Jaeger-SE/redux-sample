@@ -1,10 +1,15 @@
-import { NgModule, ModuleWithProviders, ComponentFactoryResolver, ApplicationRef, Injector } from '@angular/core';
-import { CommonModule } from "@angular/common";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import {
+  NgModule,
+  ModuleWithProviders,
+  ComponentFactoryResolver,
+  ApplicationRef,
+  Injector
+} from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import { DialogHolderComponent } from "./dialog-holder.component";
-import { DialogWrapperComponent } from "./dialog-wrapper.component";
-import { DialogService, DialogServiceConfig } from "./dialog.service";
+import { ModalHolderComponent } from './modal-holder.component';
+import { ModalWrapperComponent } from './modal-wrapper.component';
+import { ModalService, ModalServiceConfig } from './modal.service';
 
 /**
  * Dialog service factory. Creates dialog service with options
@@ -14,40 +19,38 @@ import { DialogService, DialogServiceConfig } from "./dialog.service";
  * @param { DialogServiceConfig } options
  * @return { DialogService }
  */
-export function dialogServiceFactory(resolver: ComponentFactoryResolver, applicationRef: ApplicationRef, injector: Injector, options: DialogServiceConfig) {
-  return new DialogService(resolver, applicationRef, injector, options);
+export function dialogServiceFactory(
+  resolver: ComponentFactoryResolver,
+  applicationRef: ApplicationRef,
+  injector: Injector,
+  options: ModalServiceConfig
+) {
+  return new ModalService(resolver, applicationRef, injector, options);
 }
 
 @NgModule({
-  declarations: [
-    DialogHolderComponent,
-    DialogWrapperComponent
-  ],
-  providers: [
-    DialogService
-  ],
-  imports: [
-    CommonModule,
-    BrowserAnimationsModule
-  ],
-  entryComponents: [
-    DialogHolderComponent,
-    DialogWrapperComponent
-  ]
+  declarations: [ModalHolderComponent, ModalWrapperComponent],
+  providers: [ModalService],
+  imports: [CommonModule],
+  entryComponents: [ModalHolderComponent, ModalWrapperComponent]
 })
 export class ModalModule {
-  static forRoot(config: DialogServiceConfig): ModuleWithProviders {
+  static forRoot(config: ModalServiceConfig): ModuleWithProviders {
     return {
       ngModule: ModalModule,
       providers: [
-        { provide: DialogServiceConfig, useValue: config },
+        { provide: ModalServiceConfig, useValue: config },
         {
-          provide: DialogService,
+          provide: ModalService,
           useFactory: dialogServiceFactory,
-          deps: [ComponentFactoryResolver, ApplicationRef, Injector, DialogServiceConfig]
+          deps: [
+            ComponentFactoryResolver,
+            ApplicationRef,
+            Injector,
+            ModalServiceConfig
+          ]
         }
       ]
     };
   }
 }
-

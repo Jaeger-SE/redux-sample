@@ -1,12 +1,12 @@
 export class Character {
-    id: number;
-    name: string;
-    tag: string;
-    race: string;
+  id: number;
+  name: string;
+  tag: string;
+  race: string;
 }
 
 export class GroupedCharacters {
-    groupColor: string;
-    groupName: string;
-    characters: Character[];
+  groupColor: string;
+  groupName: string;
+  characters: Character[];
 }

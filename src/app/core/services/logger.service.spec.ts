@@ -9,7 +9,10 @@ describe('LoggerService', () => {
     });
   });
 
-  it('should be created', inject([LoggerService], (service: LoggerService) => {
-    expect(service).toBeTruthy();
-  }));
+  it(
+    'should be created',
+    inject([LoggerService], (service: LoggerService) => {
+      expect(service).toBeTruthy();
+    })
+  );
 });

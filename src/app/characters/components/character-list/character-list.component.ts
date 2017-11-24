@@ -1,8 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Inject
-} from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import {
   trigger,
   animate,
@@ -11,9 +7,12 @@ import {
   query,
   stagger
 } from '@angular/animations';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs/Observable';
 
-import { CharactersSandboxService, Character } from "../../../facade/sandbox/characters-sandbox.service";
+import {
+  CharactersSandboxService,
+  Character
+} from '../../../facade/sandbox/characters-sandbox.service';
 
 @Component({
   selector: 'app-character-list',
@@ -22,17 +21,19 @@ import { CharactersSandboxService, Character } from "../../../facade/sandbox/cha
   animations: [
     trigger('listAnimation', [
       transition('* => *', [
-        query(':leave', [
-          stagger(100, [
-            animate('0.5s', style({ opacity: 0 }))
-          ])
-        ], { optional: true }),
-        query(':enter', [
-          style({ opacity: 0 }),
-          stagger(100, [
-            animate('0.5s', style({ opacity: 1 }))
-          ])
-        ], { optional: true })
+        query(
+          ':leave',
+          [stagger(100, [animate('0.5s', style({ opacity: 0 }))])],
+          { optional: true }
+        ),
+        query(
+          ':enter',
+          [
+            style({ opacity: 0 }),
+            stagger(100, [animate('0.5s', style({ opacity: 1 }))])
+          ],
+          { optional: true }
+        )
       ])
     ])
   ]
@@ -44,7 +45,5 @@ export class CharacterListComponent implements OnInit {
     this.characters = this.charactersSandboxService.characters$;
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

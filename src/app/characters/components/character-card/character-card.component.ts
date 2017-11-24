@@ -1,8 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input
-} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Character } from '../../../facade/models/character.model';
 
 @Component({
@@ -11,13 +7,9 @@ import { Character } from '../../../facade/models/character.model';
   styleUrls: ['./character-card.component.scss']
 })
 export class CharacterCardComponent implements OnInit {
+  @Input() character: Character;
 
-  @Input()
-  character: Character;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

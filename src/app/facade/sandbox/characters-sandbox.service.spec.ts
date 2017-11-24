@@ -9,7 +9,10 @@ describe('SandboxService', () => {
     });
   });
 
-  it('should be created', inject([CharactersSandboxService], (service: CharactersSandboxService) => {
-    expect(service).toBeTruthy();
-  }));
+  it(
+    'should be created',
+    inject([CharactersSandboxService], (service: CharactersSandboxService) => {
+      expect(service).toBeTruthy();
+    })
+  );
 });

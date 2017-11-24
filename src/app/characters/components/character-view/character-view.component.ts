@@ -6,9 +6,7 @@ import { Component, OnInit, Inject } from '@angular/core';
   styleUrls: ['./character-view.component.scss']
 })
 export class CharacterViewComponent implements OnInit {
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

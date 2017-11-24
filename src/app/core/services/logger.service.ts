@@ -3,12 +3,11 @@ import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class LoggerService {
-
-  constructor() { }
+  constructor() {}
 
   debug(error: any): void {
     if (environment.debug) {
-      console.log('An error occurred', error)
+      console.log('An error occurred', error);
     }
   }
 }

@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { NgPipesModule } from 'ngx-pipes';
 
@@ -11,9 +11,8 @@ import { InMemoryDataService } from './mocks/in-memory-data-service';
 // Load environment variables
 import { environment } from '../../environments/environment';
 
-// Core
+// Modules
 import { CoreModule } from '../core/core.module';
-import { ModalModule } from '../core/modal/modal.module';
 
 // Services
 import { CharacterDataService } from '../facade/http/character-data.service';
@@ -31,7 +30,6 @@ import { CharacterAddFormComponent } from './components/character-add-form/chara
     CommonModule,
     HttpModule,
     CoreModule,
-    ModalModule,
     FormsModule,
     NgPipesModule,
     ReactiveFormsModule,
@@ -41,9 +39,15 @@ import { CharacterAddFormComponent } from './components/character-add-form/chara
       delay: 500
     })
   ],
-  declarations: [CharacterListComponent, CharacterViewComponent, CharacterCardComponent, CharacterAddComponent, CharacterAddFormComponent],
+  declarations: [
+    CharacterListComponent,
+    CharacterViewComponent,
+    CharacterCardComponent,
+    CharacterAddComponent,
+    CharacterAddFormComponent
+  ],
   exports: [CharacterViewComponent],
   providers: [CharactersSandboxService, CharacterDataService],
   entryComponents: [CharacterAddFormComponent]
 })
-export class CharactersModule { }
+export class CharactersModule {}
