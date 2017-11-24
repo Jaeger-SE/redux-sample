@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import * as redux from 'redux';
+import { Store } from 'redux';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
@@ -22,7 +22,7 @@ export class CharactersSandboxService {
   public readonly characters$: Observable<Character[]>;
 
   constructor(
-    @Inject(AppStore) private store: redux.Store<AppState>,
+    @Inject(AppStore) private store: Store<AppState>,
     private characterDataService: CharacterDataService
   ) {
     this._characters = new BehaviorSubject<Character[]>([]);

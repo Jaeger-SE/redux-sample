@@ -51,7 +51,7 @@ interface ModalRegistration extends ModalOptions {
               <button class="modal-close is-large" (click)="closeDialog()"></button>
             </div>
             `,
-            styleUrls: ['./modal.scss']
+  styleUrls: ['./modal.scss']
 })
 export class ModalHolderComponent implements IModalHolderComponent, OnInit {
   @ViewChild('container') public container: ElementRef;
@@ -136,12 +136,16 @@ export class ModalHolderComponent implements IModalHolderComponent, OnInit {
     return _component.fillData(data);
   }
 
+  closeDialog() {
+    this.removeDialog(chain(this._modalComponents).last());
+  }
+
   removeDialog(component: IModalComponent<any, any>) {
     const shouldHideHolder = this._modalComponents.length <= 1;
-    const nextComponents = chain(this._modalComponents)
+    const nextComponent = chain(this._modalComponents)
       .filter(x => x !== component)
-      .value();
-    this.activateComponent(nextComponents[nextComponents.length - 1]);
+      .last<IModalComponent<any, any>>();
+    this.activateComponent(nextComponent);
     component.wrapper.isVisible = false;
     if (shouldHideHolder) {
       setTimeout(() => {
