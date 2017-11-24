@@ -15,6 +15,7 @@ import {
   trigger
 } from '@angular/animations';
 
+import { chain } from 'lodash';
 import { Observable } from 'rxjs/Observable';
 
 import {
@@ -49,14 +50,15 @@ interface ModalRegistration extends ModalOptions {
               <ng-template #element></ng-template>
               <button class="modal-close is-large" (click)="closeDialog()"></button>
             </div>
-            `
+            `,
+            styleUrls: ['./modal.scss']
 })
 export class ModalHolderComponent implements IModalHolderComponent, OnInit {
   @ViewChild('container') public container: ElementRef;
   @ViewChild('element', { read: ViewContainerRef })
   public element: ViewContainerRef;
 
-  get stateName() {
+  get stateName(): string {
     return this._isVisible ? 'show' : 'hide';
   }
 
@@ -128,31 +130,40 @@ export class ModalHolderComponent implements IModalHolderComponent, OnInit {
     if (this._isInit) {
       this._isVisible = true;
     }
-    this.activateComponent(_component);
+    setTimeout(() => {
+      this.activateComponent(_component);
+    }, fadeInDuration);
     return _component.fillData(data);
   }
 
   removeDialog(component: IModalComponent<any, any>) {
     const shouldHideHolder = this._modalComponents.length <= 1;
+    const nextComponents = chain(this._modalComponents)
+      .filter(x => x !== component)
+      .value();
+    this.activateComponent(nextComponents[nextComponents.length - 1]);
+    component.wrapper.isVisible = false;
     if (shouldHideHolder) {
-      this._isVisible = false;
       setTimeout(() => {
+        this._isVisible = false;
+      }, 0);
+    }
+
+    setTimeout(() => {
+      if (shouldHideHolder) {
         const element = this.container.nativeElement;
         element.classList.remove('is-active');
         element.classList.remove('in');
-      }, fadeOutDuration);
-    }
-
-    this._removeElement(component);
-    this.activateComponent(
-      this._modalComponents[this._modalComponents.length - 1]
-    );
+      }
+      this._removeElement(component);
+    }, fadeOutDuration);
   }
 
   private activateComponent(component: IModalComponent<any, any>): void {
     for (let i = 0; i < this._modalComponents.length; i++) {
       const componentBrowsed = this._modalComponents[i];
-      componentBrowsed.wrapper.isCollapsed = componentBrowsed !== component;
+      componentBrowsed.wrapper.isCollapsed =
+        component !== undefined && componentBrowsed !== component;
     }
   }
 

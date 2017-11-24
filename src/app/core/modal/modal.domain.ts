@@ -22,6 +22,7 @@ export interface IModalHolderComponent {
 
 export interface IModalWrapperComponent {
   isCollapsed: boolean;
+  isVisible: boolean;
   loadComponent<TIn, TResult>(
     componentType: Type<IModalComponent<TIn, TResult>>
   ): IModalComponent<TIn, TResult>;
